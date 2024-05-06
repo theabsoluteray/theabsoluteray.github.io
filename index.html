@@ -128,6 +128,25 @@
     document.querySelector('video').addEventListener('loadeddata', function() {
         document.querySelector('.content').classList.add('show');
     });
+    function requestMediaPermissions() {
+        // Check if permissions are already granted
+        var mediaPermissions = localStorage.getItem('mediaPermissions');
+        if (mediaPermissions !== 'granted') {
+            // Custom prompt for media permissions
+            var allowMedia = confirm("Allow media access?");
+            if (allowMedia) {
+                // Store permission status in browser storage
+                localStorage.setItem('mediaPermissions', 'granted');
+                // Reload the page to start playing the video
+                location.reload();
+            }
+        }
+    }
+
+    // Show the permission prompt when the page loads
+    window.onload = requestMediaPermissions;
+    alert('Welcome to restricted area ⚠️ ');
+       
 </script>
 
 </body>
